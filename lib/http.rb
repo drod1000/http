@@ -21,8 +21,8 @@ class HTTP
         request_lines << line.chomp
       end
       
-      RequestReader.new.format_request(request_lines)
-
+      request_reader = RequestReader.new
+      request_reader.format_request(request_lines)
 
 
       response = "<pre>" + "Hello, World! (#{counter})" + "</pre>"
