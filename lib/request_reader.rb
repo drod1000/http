@@ -30,9 +30,9 @@ class RequestReader
 
   def format_host(line)
     split_line = line.split(":")
-    @diagnostics["Host"] = split_line[1][1..-1]
+    @diagnostics["Host"] = split_line[1].strip
     @diagnostics["Port"] = split_line[2]
-    @diagnostics["Origin"] = split_line[1][1..-1]
+    @diagnostics["Origin"] = split_line[1].strip
   end
 
   def format_accept(request_lines)
