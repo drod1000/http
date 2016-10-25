@@ -36,7 +36,15 @@ class RequestReader
   end
 
   def format_accept(request_lines)
-    accept_lines = request_lines[6..8]  
+    accept_lines = request_lines[6..8] 
+    array = accept_lines.map do |element|
+      element.split(":") 
+    end
+    string = []
+    array.each_index do |index|
+    string << array[index][1]
+    end
+    @diagnostics["Accept"] = string.join(",").strip
   end
 
 end
