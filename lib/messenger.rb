@@ -1,4 +1,4 @@
-class Messages
+class Messenger
   
   def headers(output)
     ["http/1.1 200 ok",

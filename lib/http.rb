@@ -1,6 +1,6 @@
 require './lib/request_reader'
 require 'socket'
-require './lib/messages'
+require './lib/messenger'
 
 class HTTP
   attr_reader :tcp_server,
@@ -26,10 +26,10 @@ class HTTP
 
 
       response = "<pre>" + "Hello, World! (#{counter})" + "</pre>"
-      output = Messages.new.output(response)
+      output = Messenger.new.output(response)
      
-      client.puts Messages.new.headers(output)
-      client.puts Messages.new.output(response)
+      client.puts Messenger.new.headers(output)
+      client.puts Messenger.new.output(response)
 
       client.close
       @counter += 1
