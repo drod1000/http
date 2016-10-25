@@ -24,37 +24,31 @@ class RequestReaderTest < Minitest::Test
   end
 
   def test_it_can_assign_verb
-    skip
     request_reader.format_request(request_lines)
     assert_equal "GET", request_reader.diagnostics["Verb"]
   end
 
   def test_it_can_assign_path
-    skip
     request_reader.format_request(request_lines)
     assert_equal "/", request_reader.diagnostics["Path"]
   end
 
   def test_it_can_assign_protocol
-    skip
     request_reader.format_request(request_lines)
     assert_equal "HTTP/1.1", request_reader.diagnostics["Protocol"]
   end
 
   def test_it_can_assign_host
-    skip
     request_reader.format_request(request_lines)
     assert_equal "127.0.0.1", request_reader.diagnostics["Host"]
   end
 
   def test_it_can_assign_port
-    skip
     request_reader.format_request(request_lines)
     assert_equal "9292", request_reader.diagnostics["Port"]
   end
 
   def test_it_can_assign_origin
-    skip
     request_reader.format_request(request_lines)
     assert_equal "127.0.0.1", request_reader.diagnostics["Origin"]
   end
