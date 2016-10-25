@@ -1,6 +1,7 @@
 require './lib/request_reader'
 require 'socket'
 require './lib/messenger'
+require 'pry'
 
 class HTTP
   attr_reader :tcp_server,
@@ -23,7 +24,15 @@ class HTTP
       
       request_reader = RequestReader.new
       request_reader.format_request(request_lines)
-
+=begin
+#DIAGNOSTICS
+#Need Whitespace after every line
+#Pull out once path has been created
+      response = ""
+      request_reader.diagnostics.each do |key, value|
+         response << "#{key} : #{value}\n"
+      end
+=end
 
       response = "<pre>" + "Hello, World! (#{counter})" + "</pre>"
       
@@ -38,7 +47,5 @@ class HTTP
   end
 end
 
-if __FILE__ == $0
-  http = HTTP.new
-  http.get_request
-end
+http = HTTP.new
+http.get_request
