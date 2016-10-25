@@ -26,10 +26,11 @@ class HTTP
 
 
       response = "<pre>" + "Hello, World! (#{counter})" + "</pre>"
-      output = Messenger.new.output(response)
-     
-      client.puts Messenger.new.headers(output)
-      client.puts Messenger.new.output(response)
+      
+      messenger = Messenger.new
+      output = messenger.output(response)
+      client.puts messenger.headers(output)
+      client.puts messenger.output(response)
 
       client.close
       @counter += 1

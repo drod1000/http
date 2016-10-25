@@ -1,3 +1,5 @@
+require 'pry'
+
 class RequestReader
   
   attr_accessor :diagnostics
@@ -16,6 +18,7 @@ class RequestReader
   def format_request(request_lines)
     format_first_line(request_lines[0])
     format_host(request_lines[1])
+    format_accept(request_lines)
   end
 
   def format_first_line(line)
@@ -30,7 +33,10 @@ class RequestReader
     @diagnostics["Host"] = split_line[1][1..-1]
     @diagnostics["Port"] = split_line[2]
     @diagnostics["Origin"] = split_line[1][1..-1]
+  end
 
+  def format_accept(request_lines)
+    accept_lines = request_lines[6..8]  
   end
 
 end
