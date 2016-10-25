@@ -1,5 +1,7 @@
 class RequestReader
+  
   attr_accessor :diagnostics
+  
   def initialize
   @diagnostics = {"Verb" => nil,
                   "Path" => nil,

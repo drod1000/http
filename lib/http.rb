@@ -12,6 +12,8 @@ while line = client.gets and !line.chomp.empty?
   request_lines << line.chomp
 end
 
+p request_lines
+
 response = "<pre>" + "Hello, World! (#{counter})" + "</pre>"
 output = "<html><head></head><body>#{response}</body></html>"
 headers = ["http/1.1 200 ok",
