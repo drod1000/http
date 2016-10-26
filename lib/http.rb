@@ -34,7 +34,6 @@ class HTTP
         @running = false
       end
 
-
       messenger = Messenger.new
       output = messenger.output(response)
       client.puts messenger.headers(output)
