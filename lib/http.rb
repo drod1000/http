@@ -9,10 +9,11 @@ class HTTP
   def initialize
     @tcp_server = TCPServer.new(9292)
     @counter = 0
+    @running = true
   end
 
   def get_request
-    loop do
+    while @running
       client = tcp_server.accept
 
       puts "Ready for a request"
@@ -32,6 +33,7 @@ class HTTP
         response = Time.now.strftime('%e %b %Y %H:%M:%S%p').to_s
       elsif parsed.path == "/shutdown"
         response = "Total Requests: #{counter}"
+        @running = false
       else
         response = "<pre>"
         parsed.diagnostics.each do |key, value|
