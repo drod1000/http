@@ -35,6 +35,7 @@ class HTTP
         response = "Total Requests: #{counter}"
         @running = false
       else
+      ##Move to parser class
         response = "<pre>"
         parsed.diagnostics.each do |key, value|
           response << "#{key} : #{value}\n"

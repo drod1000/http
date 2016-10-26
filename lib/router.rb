@@ -4,6 +4,7 @@ class Router
               :count
 
   def initialize(path, count)
+    ##Initialize with parsed instead
     @path = path
     @count = count
   end
