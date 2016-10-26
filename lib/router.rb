@@ -1,25 +1,26 @@
 class Router
 
-  attr_reader :path,
+  attr_reader :diagnostics,
               :count
 
-  def initialize(path, count)
+  def initialize(diagnostics, count)
     ##Initialize with formatted hash instead of path
-    @path = path
+    @diagnostics = diagnostics
     @count = count
   end
 
   def response
     ##Replace path with hash["Path"]
     response = ""
-    if path == "/hello"
+    if diagnostics["Path"] == "/hello"
       response = "<pre>" + "Hello, World! (#{count})" + "</pre>"
-    elsif path == "/datetime"
+    elsif diagnostics["Path"] == "/datetime"
       response = Time.now.strftime('%e %b %Y %H:%M:%S%p').to_s
-    elsif path == "/shutdown"
+    elsif diagnostics["Path"] == "/shutdown"
       response = "Total Requests: #{count}"
     end
     response
   end
+  
 
 end

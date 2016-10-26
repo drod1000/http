@@ -23,21 +23,21 @@ class HTTP
         request_lines << line.chomp
       end
       
-      parsed = Parser.new
-      parsed.format_request(request_lines)
-
+      parser = Parser.new
+      parser.format_request(request_lines)
+      parsed = parser.return_diagnostics
       ##Move entire if statement to Router
-      if parsed.path == "/hello"
+      if parsed["Path"] == "/hello"
         response = "<pre>" + "Hello, World! (#{counter})" + "</pre>"
-      elsif parsed.path == "/datetime"
+      elsif parsed["Path"] == "/datetime"
         response = Time.now.strftime('%e %b %Y %H:%M:%S%p').to_s
-      elsif parsed.path == "/shutdown"
+      elsif parsed["Path"] == "/shutdown"
         response = "Total Requests: #{counter}"
         @running = false
       else
       ##Move to Router
         response = "<pre>"
-        parsed.diagnostics.each do |key, value|
+        parser.diagnostics.each do |key, value|
           response << "#{key} : #{value}\n"
         end
         response << "</pre>"
