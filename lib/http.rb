@@ -6,7 +6,8 @@ require 'pry'
 
 class HTTP
   attr_reader :tcp_server,
-              :counter
+              :counter,
+              :running
   def initialize
     @tcp_server = TCPServer.new(9292)
     @counter = 0
@@ -14,9 +15,8 @@ class HTTP
   end
 
   def get_request
-    while @running
+    while running
       client = tcp_server.accept
-
       puts "Ready for a request"
       request_lines = []
 
@@ -30,6 +30,9 @@ class HTTP
       
       router = Router.new(parsed, counter)
       response = router.response
+      if response.include?("Total")
+        @running = false
+      end
 
 
       messenger = Messenger.new
