@@ -20,6 +20,8 @@ class Router
       response = "Total Requests: #{count}"
     elsif diagnostics["Path"] == "/word_search"
       response = word_search(diagnostics["Value"])
+    elsif diagnostics["Path"] == "/start_game"
+      response = "Good luck!"
     else
       response << "<pre>"
       diagnostics.each do |key, value|
