@@ -50,10 +50,9 @@ class Parser
   def path
     diagnostics["Path"]
   end
-  
-  def report_diagnostics
-  end
 
-  
+  def return_diagnostics
+    @diagnostics
+  end
 
 end
