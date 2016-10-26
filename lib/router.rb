@@ -16,6 +16,8 @@ class Router
       response = Time.now.strftime('%e %b %Y %H:%M:%S%p').to_s
     elsif diagnostics["Path"] == "/shutdown"
       response = "Total Requests: #{count}"
+    elsif diagnostics["Path"] == "/word_search"
+    
     else
       response << "<pre>"
       diagnostics.each do |key, value|
