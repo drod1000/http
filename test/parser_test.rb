@@ -66,7 +66,8 @@ class ParserTest < Minitest::Test
   def test_it_can_return_diagnostics_hash
     before = {"Verb"=>nil, 
               "Path"=>nil, 
-              "Protocol"=>nil, 
+              "Parameter"=>nil,
+              "Protocol"=>nil,
               "Host"=>nil, 
               "Port"=>nil, 
               "Origin"=>nil, 
@@ -75,6 +76,7 @@ class ParserTest < Minitest::Test
     parser.format_request(request_lines)
     after = {"Verb"=>"GET", 
                 "Path"=>"/", 
+                "Parameter"=>nil,
                 "Protocol"=>"HTTP/1.1", 
                 "Host"=>"127.0.0.1", 
                 "Port"=>"9292", 

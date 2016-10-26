@@ -7,6 +7,8 @@ class Parser
   def initialize
   @diagnostics = {"Verb" => nil,
                   "Path" => nil,
+                  "Parameter" => nil,
+                  "Value" => nil,
                   "Protocol" => nil,
                   "Host" => nil,
                   "Port" => nil,
@@ -24,7 +26,13 @@ class Parser
   def format_first_line(line)
     split_line = line.split(" ")
     @diagnostics["Verb"] = split_line[0]
-    @diagnostics["Path"] = split_line[1]
+    if split_line[1].include?("?")
+      @diagnostics["Path"] = split_line[1].split("?")[0]
+      @diagnostics["Parameter"] = split_line[1].split("?")[1].split("=")[0]
+      @diagnostics["Value"] = split_line[1].split("?")[1].split("=")[1]
+    else
+      @diagnostics["Path"] = split_line[1]
+    end  
     @diagnostics["Protocol"] = split_line[2]
   end
 
