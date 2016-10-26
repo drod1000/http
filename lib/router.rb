@@ -1,3 +1,5 @@
+require './lib/dictionary'
+
 class Router
 
   attr_reader :diagnostics,
@@ -25,9 +27,12 @@ class Router
       end
         response << "</pre>"
     end
-
     response
   end
   
+  def match_in_dictionary
+    dictionary = Dictionary.new
+    dictionary.find_match(diagnostics["Value"])
+  end
 
 end
