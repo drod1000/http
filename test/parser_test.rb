@@ -64,14 +64,22 @@ class ParserTest < Minitest::Test
   end
 
   def test_it_can_return_diagnostics_hash
+    before = {"Verb"=>nil, 
+              "Path"=>nil, 
+              "Protocol"=>nil, 
+              "Host"=>nil, 
+              "Port"=>nil, 
+              "Origin"=>nil, 
+              "Accept"=>nil}
+    assert_equal before, parser.return_diagnostics
     parser.format_request(request_lines)
-    expected = {"Verb"=>"GET", 
+    after = {"Verb"=>"GET", 
                 "Path"=>"/", 
                 "Protocol"=>"HTTP/1.1", 
                 "Host"=>"127.0.0.1", 
                 "Port"=>"9292", 
                 "Origin"=>"127.0.0.1", 
                 "Accept"=>"*/*, gzip, deflate, sdch, br, en-US,en;q=0.8,fr-FR;q=0.6,fr;q=0.4"}
-    assert_equal expected, parser.return_diagnostics
+    assert_equal after, parser.return_diagnostics
   end
 end
