@@ -1,6 +1,7 @@
 require './lib/parser'
 require 'socket'
 require './lib/messenger'
+require './lib/router'
 require 'pry'
 
 class HTTP
@@ -26,23 +27,10 @@ class HTTP
       parser = Parser.new
       parser.format_request(request_lines)
       parsed = parser.return_diagnostics
-      ##Move entire if statement to Router
-      if parsed["Path"] == "/hello"
-        response = "<pre>" + "Hello, World! (#{counter})" + "</pre>"
-      elsif parsed["Path"] == "/datetime"
-        response = Time.now.strftime('%e %b %Y %H:%M:%S%p').to_s
-      elsif parsed["Path"] == "/shutdown"
-        response = "Total Requests: #{counter}"
-        @running = false
-      else
-      ##Move to Router
-        response = "<pre>"
-        parser.diagnostics.each do |key, value|
-          response << "#{key} : #{value}\n"
-        end
-        response << "</pre>"
-      end
-      ##Add if response includes Total Requests then running is false
+      
+      router = Router.new(parsed, counter)
+      response = router.response
+
 
       messenger = Messenger.new
       output = messenger.output(response)
