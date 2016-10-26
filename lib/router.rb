@@ -4,12 +4,13 @@ class Router
               :count
 
   def initialize(path, count)
-    ##Initialize with parsed instead
+    ##Initialize with formatted hash instead of path
     @path = path
     @count = count
   end
 
   def response
+    ##Replace path with hash["Path"]
     response = ""
     if path == "/hello"
       response = "<pre>" + "Hello, World! (#{count})" + "</pre>"

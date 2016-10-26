@@ -26,7 +26,7 @@ class HTTP
       parsed = Parser.new
       parsed.format_request(request_lines)
 
-      
+      ##Move entire if statement to Router
       if parsed.path == "/hello"
         response = "<pre>" + "Hello, World! (#{counter})" + "</pre>"
       elsif parsed.path == "/datetime"
@@ -35,13 +35,14 @@ class HTTP
         response = "Total Requests: #{counter}"
         @running = false
       else
-      ##Move to parser class
+      ##Move to Router
         response = "<pre>"
         parsed.diagnostics.each do |key, value|
           response << "#{key} : #{value}\n"
         end
         response << "</pre>"
       end
+      ##Add if response includes Total Requests then running is false
 
       messenger = Messenger.new
       output = messenger.output(response)
