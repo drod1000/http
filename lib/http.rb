@@ -1,4 +1,4 @@
-require './lib/request_reader'
+require './lib/parser'
 require 'socket'
 require './lib/messenger'
 require 'pry'
@@ -22,19 +22,19 @@ class HTTP
         request_lines << line.chomp
       end
       
-      request_reader = RequestReader.new
-      request_reader.format_request(request_lines)
+      parsed = Parser.new
+      parsed.format_request(request_lines)
 
       
-      if request_reader.path == "/hello"
+      if parsed.path == "/hello"
         response = "<pre>" + "Hello, World! (#{counter})" + "</pre>"
-      elsif request_reader.path == "/datetime"
+      elsif parsed.path == "/datetime"
         response = Time.now.strftime('%e %b %Y %H:%M:%S%p').to_s
-      elsif request_reader.path == "/shutdown"
+      elsif parsed.path == "/shutdown"
         response = "Total Requests: #{counter}"
       else
         response = "<pre>"
-        request_reader.diagnostics.each do |key, value|
+        parsed.diagnostics.each do |key, value|
           response << "#{key} : #{value}\n"
         end
         response << "</pre>"
