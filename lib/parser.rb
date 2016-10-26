@@ -1,6 +1,6 @@
 require 'pry'
 
-class RequestReader
+class Parser
   
   attr_accessor :diagnostics
   
