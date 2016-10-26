@@ -1,4 +1,4 @@
-class Decision
+class Router
 
   attr_reader :path,
               :count
