@@ -50,5 +50,10 @@ class RequestReader
   def path
     diagnostics["Path"]
   end
+  
+  def report_diagnostics
+  end
+
+  
 
 end

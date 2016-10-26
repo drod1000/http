@@ -63,4 +63,6 @@ class RequestReaderTest < Minitest::Test
     assert_equal "/", request_reader.path
   end
 
+  def test_it_can_return_diagnostics
+  end
 end
