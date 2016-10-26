@@ -58,4 +58,9 @@ class RequestReaderTest < Minitest::Test
     assert_equal "*/*, gzip, deflate, sdch, br, en-US,en;q=0.8,fr-FR;q=0.6,fr;q=0.4", request_reader.diagnostics["Accept"]
   end
 
+  def test_it_can_return_path
+    request_reader.format_request(request_lines)
+    assert_equal "/", request_reader.path
+  end
+
 end

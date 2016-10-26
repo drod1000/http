@@ -47,4 +47,8 @@ class RequestReader
     @diagnostics["Accept"] = string.join(",").strip
   end
 
+  def path
+    diagnostics["Path"]
+  end
+
 end

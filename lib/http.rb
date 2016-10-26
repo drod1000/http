@@ -24,17 +24,14 @@ class HTTP
       
       request_reader = RequestReader.new
       request_reader.format_request(request_lines)
-=begin
 #DIAGNOSTICS
-#Need Whitespace after every line
-#Pull out once path has been created
-      response = ""
+      response = "<pre>"
       request_reader.diagnostics.each do |key, value|
          response << "#{key} : #{value}\n"
       end
-=end
-
-      response = "<pre>" + "Hello, World! (#{counter})" + "</pre>"
+      response << "</pre>"
+#HELLO WORLD
+#      response = "<pre>" + "Hello, World! (#{counter})" + "</pre>"
       
       messenger = Messenger.new
       output = messenger.output(response)
