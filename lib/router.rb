@@ -19,7 +19,7 @@ class Router
     elsif diagnostics["Path"] == "/shutdown"
       response = "Total Requests: #{count}"
     elsif diagnostics["Path"] == "/word_search"
-    
+      response = word_search(diagnostics["Value"])
     else
       response << "<pre>"
       diagnostics.each do |key, value|
@@ -30,9 +30,19 @@ class Router
     response
   end
   
-  def match_in_dictionary
+  def match_in_dictionary(word)
     dictionary = Dictionary.new
-    dictionary.find_match(diagnostics["Value"])
+    dictionary.find_match(word)
   end
+
+  def word_search(word)
+    match = ""
+    if match_in_dictionary(word)
+      match = "#{word} is a known word."
+    else
+      match = "#{word} is not a known word."
+    end
+  end
+
 
 end

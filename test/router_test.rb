@@ -24,4 +24,22 @@ class RouterTest < Minitest::Test
     assert_equal expected, Router.new({"Path"=>"/shutdown"}, 1).response
   end
 
+  def test_it_can_confirm_match_in_dictionary
+    router = Router.new({"Path"=>"/"}, 0)
+    assert router.match_in_dictionary("apple")
+    assert router.match_in_dictionary("strawberry")
+  end
+
+  def test_it_can_return_string_confirming_match_in_dictionary
+    router = Router.new({"Path"=>"/"}, 0)
+    expected = "apple is a known word."
+    assert_equal expected, router.word_search("apple")
+  end
+  
+  def test_it_can_return_string_denying_match_in_dictionary
+    router = Router.new({"Path"=>"/"}, 0)
+    expected = "aaaaa is not a known word."
+    assert_equal expected, router.word_search("aaaaa")
+  end
+
 end
