@@ -24,15 +24,20 @@ class HTTP
       
       request_reader = RequestReader.new
       request_reader.format_request(request_lines)
-#DIAGNOSTICS
-      response = "<pre>"
-      request_reader.diagnostics.each do |key, value|
-         response << "#{key} : #{value}\n"
-      end
-      response << "</pre>"
-#HELLO WORLD
-#      response = "<pre>" + "Hello, World! (#{counter})" + "</pre>"
       
+      if request_reader.path == "/"
+        response = "<pre>"
+        request_reader.diagnostics.each do |key, value|
+          response << "#{key} : #{value}\n"
+        end
+        response << "</pre>"
+      elsif request_reader.path == "/hello"
+        response = "<pre>" + "Hello, World! (#{counter})" + "</pre>"
+      elsif request_reader.path == "/datetime"
+        response = Time.now.strftime('%e %b %Y %H:%M:%S%p').to_s
+      elsif request_reader.path == "/shutdown"
+        response = "Total Requests: #{counter}"
+      end
       messenger = Messenger.new
       output = messenger.output(response)
       client.puts messenger.headers(output)
