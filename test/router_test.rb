@@ -4,9 +4,11 @@ require './lib/router'
 
 class RouterTest < Minitest::Test
   attr_reader :router
+
   def setup
   @router = Router.new
   end
+
   def test_it_can_create_router
     assert router
   end
@@ -33,6 +35,12 @@ class RouterTest < Minitest::Test
   def test_it_can_return_string_confirming_match_in_dictionary
     expected = "apple is a known word."
     assert_equal expected, router.word_search("apple")
+  end
+
+  def test_response_can_initialize_game_within_router
+    refute router.game
+    router.response({"Path"=>"/start_game"}, 0)
+    assert router.game
   end
   
   def test_it_can_return_string_denying_match_in_dictionary

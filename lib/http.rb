@@ -9,12 +9,14 @@ class HTTP
               :counter,
               :running,
               :router
+
   def initialize
     @tcp_server = TCPServer.new(9292)
     @counter = 0
     @running = true
     @router = nil
   end
+
   def get_request
     while running
       client = tcp_server.accept
@@ -43,6 +45,7 @@ class HTTP
       @counter += 1
     end
   end
+  
 end
 
 http = HTTP.new
