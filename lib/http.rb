@@ -53,5 +53,7 @@ class HTTP
   
 end
 
-http = HTTP.new
-http.get_request
+if __FILE__ == $0
+  http = HTTP.new
+  http.get_request
+end
