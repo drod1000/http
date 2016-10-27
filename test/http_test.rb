@@ -22,11 +22,11 @@ class HTTPTest < Minitest::Test
 
  def test_hello_world
   response = Faraday.get("http://127.0.0.1:9292/hello")
-  assert_equal "<html><head></head><body><pre>Hello, World! (2)</pre></body></html>", response.body
-  response = Faraday.get("http://127.0.0.1:9292/hello")
   assert_equal "<html><head></head><body><pre>Hello, World! (3)</pre></body></html>", response.body
   response = Faraday.get("http://127.0.0.1:9292/hello")
   assert_equal "<html><head></head><body><pre>Hello, World! (4)</pre></body></html>", response.body
+  response = Faraday.get("http://127.0.0.1:9292/hello")
+  assert_equal "<html><head></head><body><pre>Hello, World! (5)</pre></body></html>", response.body
  end
 
  def test_diagnostics
@@ -56,9 +56,19 @@ class HTTPTest < Minitest::Test
  end
 
  def test_it_can_refute_unknown_word
+  response = Faraday.get("http://127.0.0.1:9292/word_search?word=aaaaa")
+  expected = "is not a known word"
+  assert response.body.include?(expected)
+ end
+
+ def test_it_can_start_game_with_post_only
+ response_1 = Faraday.get("http://127.0.0.1:9292/start_game")
+ response_2 = Faraday.post("http://127.0.0.1:9292/start_game")
+ expected = "Good luck"
+ refute response_1.body.include?(expected)
+ assert response_2.body.include?(expected)
  end
  
-
  def test_shutdown
  response = Faraday.get("http://127.0.0.1:9292/shutdown")
  assert response.body.include?("Total Requests:")
