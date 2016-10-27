@@ -58,11 +58,6 @@ class ParserTest < Minitest::Test
     assert_equal "*/*, gzip, deflate, sdch, br, en-US,en;q=0.8,fr-FR;q=0.6,fr;q=0.4", parser.diagnostics["Accept"]
   end
 
-  def test_it_can_return_path
-    parser.format_request(request_lines)
-    assert_equal "/", parser.path
-  end
-
   def test_it_can_return_diagnostics_hash
     before = {"Verb"=>nil, 
               "Path"=>nil, 

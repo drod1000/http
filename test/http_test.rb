@@ -74,6 +74,4 @@ class HTTPTest < Minitest::Test
  assert response.body.include?("Total Requests:")
  end
 
-
-
 end

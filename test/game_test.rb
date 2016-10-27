@@ -23,5 +23,4 @@ class GameTest < Minitest::Test
     assert game.guess_number(50)
     assert game.guess_number(75)
   end
-  
 end
