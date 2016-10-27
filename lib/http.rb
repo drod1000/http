@@ -26,6 +26,8 @@ class HTTP
       while line = client.gets and !line.chomp.empty?
         request_lines << line.chomp
       end
+      
+      p request_lines
 
       parser = Parser.new
       parser.format_request(request_lines)
