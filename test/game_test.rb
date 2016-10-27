@@ -19,8 +19,4 @@ class GameTest < Minitest::Test
     assert game.guesses
   end
 
-  def test_it_provides_feedback_for_low_number
-    expected = "You have made"
-  end
-
 end
