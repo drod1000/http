@@ -17,6 +17,9 @@ class Parser
 
   def format_request(request_lines)
     format_first_line(request_lines[0])
+    if post_parameter?
+      get_post_paramater(request_lines)
+    end
     format_host(request_lines[1])
     format_accept(request_lines)
   end
@@ -52,12 +55,17 @@ class Parser
     end
     @diagnostics["Accept"] = string.join(",").strip
   end
-
-  def path
-    diagnostics["Path"]
-  end
   
   def return_diagnostics
     @diagnostics
   end
+
+  def get_post_paramater(request_lines)
+    @diagnostics["Value"] = request_lines[5].split(" ")[1]
+  end
+
+  def post_parameter?
+      diagnostics["Verb"] == "POST" && diagnostics["Path"] == "/game"
+  end
+
 end
