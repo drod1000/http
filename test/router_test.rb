@@ -42,6 +42,13 @@ class RouterTest < Minitest::Test
     router.response({"Verb"=>"POST","Path"=>"/start_game"}, 0)
     assert router.game
   end
+
+  def test_it_can_guess_number_if_guess_is_given
+    router.response({"Verb"=>"POST","Path"=>"/start_game"}, 0)
+  end
+
+  def test_it_can_provide_game_feedback
+  end
   
   def test_it_can_return_string_denying_match_in_dictionary
     expected = "aaaaa is not a known word."

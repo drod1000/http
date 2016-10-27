@@ -81,5 +81,19 @@ class ParserTest < Minitest::Test
                 "Accept"=>"*/*, gzip, deflate, sdch, br, en-US,en;q=0.8,fr-FR;q=0.6,fr;q=0.4"}
     assert_equal after, parser.return_diagnostics
   end
+
+  def test_it_will_remain_nil_if_not_given_parameters
+    without_parameters = "GET / HTTP/1.1"
+    parser.format_first_line(without_parameters)
+    refute parser.diagnostics["Parameter"]
+    refute parser.diagnostics["Value"]
+  end
+
+  def test_it_will_extract_parameters_if_given
+    with_parameters = "GET /?word=hello"
+    parser.format_first_line(with_parameters)
+    assert_equal "word", parser.diagnostics["Parameter"]
+    assert_equal "hello", parser.diagnostics["Value"]
+  end
   
 end
