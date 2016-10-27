@@ -3,16 +3,16 @@ require 'pry'
 class Parser
   attr_accessor :diagnostics 
   def initialize
-  @diagnostics = {"Verb" => nil,
-                  "Path" => nil,
-                  "Parameter" => nil,
-                  "Value" => nil,
-                  "Protocol" => nil,
-                  "Host" => nil,
-                  "Port" => nil,
-                  "Origin" => nil,
-                  "Accept" => nil
-  }
+    @diagnostics = {"Verb" => nil,
+                    "Path" => nil,
+                    "Parameter" => nil,
+                    "Value" => nil,
+                    "Protocol" => nil,
+                    "Host" => nil,
+                    "Port" => nil,
+                    "Origin" => nil,
+                    "Accept" => nil
+    }
   end
 
   def format_request(request_lines)

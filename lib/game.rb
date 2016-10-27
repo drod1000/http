@@ -12,26 +12,15 @@ class Game
   def guess_number(guess)
     if guess != last_guess
       @guesses += 1
+      @last_guess = guess
     end
-    @last_guess = guess
-    feedback = ""
-    if guess == number
-      feedback = "You win! It took #{guesses} guesses."
-    elsif guess < number
-      feedback = "Too low.#{guesses} guesses so far."
-    else
-      feedback = "Too high. #{guesses} guesses so far."
-    end
-  feedback
+    return "You win! It took #{guesses} guesses." if guess == number
+    return "Too low.#{guesses} guesses so far." if guess < number
+    "Too high. #{guesses} guesses so far." if guess > number
   end
 
   def feedback
-    feedback = ""
-    if last_guess
-      feedback = "Last guess was #{last_guess}. #{guess_number(last_guess)}"
-    else
-      feedback = "No guesses have been made so far."
-    end
-    feedback
+    return "Last guess was #{last_guess}. #{guess_number(last_guess)}" if last_guess
+    "No guesses have been made so far."
   end
 end
