@@ -2,13 +2,11 @@ require './lib/dictionary'
 require './lib/game'
 
 class Router
-  attr_reader :diagnostics,
-              :count
-  def initialize(diagnostics, count)
-    @diagnostics = diagnostics
-    @count = count
+  attr_accessor :game
+  def initialize
+    @game = nil
   end
-  def response
+  def response(diagnostics, count)
     response = ""
     if diagnostics["Path"] == "/hello"
       response = "<pre>" + "Hello, World! (#{count})" + "</pre>"
@@ -22,7 +20,7 @@ class Router
       start_game
       response = "Good luck!"
     elsif diagnostics["Path"] == "/game"
-      response = game.guess_number(diagnostics["Value"])
+      response = game.guess_number(diagnostics["Value"].to_i)
     else
       response << "<pre>"
       diagnostics.each do |key, value|

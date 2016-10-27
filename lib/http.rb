@@ -7,11 +7,13 @@ require 'pry'
 class HTTP
   attr_reader :tcp_server,
               :counter,
-              :running
+              :running,
+              :router
   def initialize
     @tcp_server = TCPServer.new(9292)
     @counter = 0
     @running = true
+    @router = nil
   end
   def get_request
     while running
@@ -24,8 +26,12 @@ class HTTP
       parser = Parser.new
       parser.format_request(request_lines)
       parsed = parser.return_diagnostics
-      router = Router.new(parsed, counter)
-      response = router.response
+      if router
+        response = router.response(parsed, counter)
+      else
+        @router = Router.new
+        response = router.response(parsed, counter)
+      end
       if response.include?("Total")
         @running = false
       end

@@ -9,11 +9,11 @@ class Game
     @guesses += 1
     feedback = ""
     if guess == number
-      feedback = "You win! It took #{guesses}."
+      feedback = "You win! It took #{guesses} guesses."
     elsif guess < number
-      feedback = "Too low. #{guesses} so far."
+      feedback = "Too low.#{guesses} guesses so far."
     else
-      feedback = "Too high. #{guesses} so far."
+      feedback = "Too high. #{guesses} guesses so far."
     end
   feedback
   end
