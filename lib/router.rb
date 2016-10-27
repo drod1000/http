@@ -3,10 +3,33 @@ require './lib/game'
 
 class Router
   attr_accessor :game
+
   def initialize
     @game = nil
   end
+
   def response(diagnostics, count)
+    response = ""
+    if diagnostics["Verb"] == "GET"
+      response = get_response(diagnostics, count)
+    elsif diagnostics["Verb"] == "POST"
+      response = post_response(diagnostics, count)
+    end
+    response
+  end
+
+  def post_response(diagnostics, count)
+    response = ""
+    if diagnostics["Path"] == "/start_game"
+      start_game
+      response = "Good luck!"
+    elsif diagnostics["Path"] == "/game"
+      response = game.guess_number(diagnostics["Value"].to_i)
+    end
+    response
+  end
+
+  def get_response(diagnostics, count)
     response = ""
     if diagnostics["Path"] == "/hello"
       response = "<pre>" + "Hello, World! (#{count})" + "</pre>"
@@ -16,11 +39,6 @@ class Router
       response = "Total Requests: #{count}"
     elsif diagnostics["Path"] == "/word_search"
       response = word_search(diagnostics["Value"])
-    elsif diagnostics["Path"] == "/start_game"
-      start_game
-      response = "Good luck!"
-    elsif diagnostics["Path"] == "/game"
-      response = game.guess_number(diagnostics["Value"].to_i)
     else
       response << "<pre>"
       diagnostics.each do |key, value|
@@ -29,7 +47,8 @@ class Router
         response << "</pre>"
     end
     response
-  end 
+  end
+
   def match_in_dictionary(word)
     dictionary = Dictionary.new
     dictionary.find_match(word)

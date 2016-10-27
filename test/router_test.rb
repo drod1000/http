@@ -15,16 +15,16 @@ class RouterTest < Minitest::Test
 
   def test_it_can_return_hello_string
     expected = "<pre>Hello, World! (1)</pre>"
-    assert_equal expected, router.response({"Path"=>"/hello"}, 1)
+    assert_equal expected, router.response({"Verb"=>"GET","Path"=>"/hello"}, 1)
   end
 
   def test_it_can_return_time_string
-    assert_equal Time.now.strftime('%e %b %Y %H:%M:%S%p').to_s, router.response({"Path"=>"/datetime"}, 1)
+    assert_equal Time.now.strftime('%e %b %Y %H:%M:%S%p').to_s, router.response({"Verb"=>"GET","Path"=>"/datetime"}, 1)
   end
 
   def test_it_can_return_shutdown_string
     expected = "Total Requests: 1"
-    assert_equal expected, router.response({"Path"=>"/shutdown"}, 1)
+    assert_equal expected, router.response({"Verb"=>"GET","Path"=>"/shutdown"}, 1)
   end
 
   def test_it_can_confirm_match_in_dictionary
@@ -39,7 +39,7 @@ class RouterTest < Minitest::Test
 
   def test_response_can_initialize_game_within_router
     refute router.game
-    router.response({"Path"=>"/start_game"}, 0)
+    router.response({"Verb"=>"POST","Path"=>"/start_game"}, 0)
     assert router.game
   end
   
