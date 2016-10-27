@@ -19,4 +19,9 @@ class GameTest < Minitest::Test
     assert game.guesses
   end
 
+  def test_it_returns_feedback_string
+    assert game.guess_number(25)
+    assert game.guess_number(50)
+    assert game.guess_number(75)
+  end
 end
