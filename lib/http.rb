@@ -27,7 +27,6 @@ class HTTP
         request_lines << line.chomp
       end
 
-      p request_lines
       parser = Parser.new
       parser.format_request(request_lines)
       parsed = parser.return_diagnostics
