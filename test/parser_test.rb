@@ -3,7 +3,6 @@ require 'minitest/pride'
 require './lib/parser'
 
 class ParserTest < Minitest::Test
-
   attr_reader   :parser,
                 :request_lines
   def setup
