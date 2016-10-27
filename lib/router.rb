@@ -1,4 +1,5 @@
 require './lib/dictionary'
+require './lib/game'
 
 class Router
   attr_reader :diagnostics,
@@ -18,7 +19,10 @@ class Router
     elsif diagnostics["Path"] == "/word_search"
       response = word_search(diagnostics["Value"])
     elsif diagnostics["Path"] == "/start_game"
+      start_game
       response = "Good luck!"
+    elsif diagnostics["Path"] == "/game"
+      response = game.guess_number(diagnostics["Value"])
     else
       response << "<pre>"
       diagnostics.each do |key, value|
@@ -40,4 +44,8 @@ class Router
       match = "#{word} is not a known word."
     end
   end
+  def start_game
+    @game = Game.new
+  end
+
 end
