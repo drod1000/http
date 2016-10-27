@@ -1,15 +1,12 @@
 require './lib/dictionary'
 
 class Router
-
   attr_reader :diagnostics,
               :count
-
   def initialize(diagnostics, count)
     @diagnostics = diagnostics
     @count = count
   end
-
   def response
     response = ""
     if diagnostics["Path"] == "/hello"
@@ -30,13 +27,11 @@ class Router
         response << "</pre>"
     end
     response
-  end
-  
+  end 
   def match_in_dictionary(word)
     dictionary = Dictionary.new
     dictionary.find_match(word)
   end
-
   def word_search(word)
     match = ""
     if match_in_dictionary(word)
@@ -45,6 +40,4 @@ class Router
       match = "#{word} is not a known word."
     end
   end
-
-
 end
